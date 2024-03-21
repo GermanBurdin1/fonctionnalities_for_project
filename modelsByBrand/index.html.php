@@ -21,7 +21,6 @@
 	<ul id="liste">
 	</ul>
 	<canvas id="myChart" width="400" height="400"></canvas>
-	<canvas id="anotherChart" width="400" height="400"></canvas>
 	<div id="tableContainer"></div>
 	<script src="./main.js"></script>
 </body>
