@@ -10,22 +10,22 @@ $dsn = "mysql:host=$host;dbname=$dbname";
 try {
     $pdo = new PDO($dsn, $user, $pass);
 
-    if (isset($_GET['brandId'])) {
-        $brandId = $_GET['brandId'];
-        $sql = "SELECT name FROM model WHERE id_brand = :brandId"; 
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(['brandId' => $brandId]);
+    if ($_GET['type'] === 'brandsModelsCount') {
+        $sql = "SELECT b.name AS brandName, COUNT(m.id_model) AS modelsCount FROM brand b JOIN model m ON b.id_brand = m.id_brand GROUP BY b.name";
+    } else if ($_GET['type'] === 'typesModelsCount') {
+        $sql = "SELECT t.name AS typeName, COUNT(m.id_model) AS modelsCount FROM type t JOIN model m ON t.id_type = m.Id_type GROUP BY t.name";
     } else {
-        $search = isset($_GET['search']) ? $_GET['search'] . '%' : 'Acer%'; 
-        $sql = "SELECT id_brand, name FROM brand WHERE name LIKE ?"; 
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$search]);
+        throw new Exception("Type de requête inconnu.");
     }
 
+    $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     header('Content-Type: application/json');
     echo json_encode($result);
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+
+} catch (Exception $e) {
+    header('HTTP/1.1 500 Internal Server Error');
+    echo json_encode(['error' => $e->getMessage()]);
 }
 ?>

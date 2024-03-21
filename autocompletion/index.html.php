@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>Liste déroulante:</h1>
+    <h1>Liste déroulante des villes de France:</h1>
     <input type="text" name="choix" id="choix">
     <select name="liste" id="liste">
 
