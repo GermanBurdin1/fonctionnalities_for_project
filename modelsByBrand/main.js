@@ -58,7 +58,7 @@ choix.addEventListener("keypress", function(e) {
         if (selectedBrand) {
             searchModelsByBrandId(selectedBrand.id_brand); 
         } else {
-            console.log("Марка не найдена или не выбрана");
+            console.log("La marque n'est pas trouvée ou choisie");
         }
     }
 });
@@ -72,9 +72,11 @@ function loadChartData(url, chartElementId, chartLabel) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
+			console.log(data);
             const labels = data.map(item => item.brandName || item.typeName);
             const counts = data.map(item => item.modelsCount);
             const ctx = document.getElementById(chartElementId).getContext('2d');
+			console.log(ctx.canvas.width, ctx.canvas.height);
             new Chart(ctx, {
                 type: 'bar',
                 data: {

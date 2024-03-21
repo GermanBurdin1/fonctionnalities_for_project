@@ -1,0 +1,37 @@
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 20px;
+	background-color: #f5f5f5;
+}
+h1 {
+	color: #333;
+}
+label, input, ul {
+	display: block;
+	margin-bottom: 10px;
+}
+input {
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	width: calc(100% - 22px); /* Подгонка под padding и border */
+}
+ul {
+	list-style: none;
+	padding-left: 0;
+}
+li {
+	padding: 5px;
+	border-bottom: 1px solid #eee;
+}
+#myChart, #anotherChart {
+	width: 100%;
+	max-width: 400px; /* Максимальная ширина, чтобы не растягивать на всю ширину */
+	height: 400px;
+	margin: 20px auto;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
