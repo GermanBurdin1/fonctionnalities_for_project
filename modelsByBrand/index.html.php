@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Autocomplétion</title>
 	<link rel='stylesheet' href="./style.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -21,8 +22,8 @@
 	</ul>
 	<canvas id="myChart" width="400" height="400"></canvas>
 	<canvas id="anotherChart" width="400" height="400"></canvas>
+	<div id="tableContainer"></div>
 	<script src="./main.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>

@@ -17,13 +17,21 @@ try {
             $sql = "SELECT b.name AS brandName, COUNT(m.id_model) AS modelsCount FROM brand b JOIN model m ON b.id_brand = m.id_brand GROUP BY b.name";
         } elseif ($_GET['type'] === 'typesModelsCount') {
             $sql = "SELECT t.name AS typeName, COUNT(m.id_model) AS modelsCount FROM type t JOIN model m ON t.id_type = m.Id_type GROUP BY t.name";
+		} elseif ($_GET['type'] === 'specificDataForChart') {
+			$brandId = $_GET['brandId'] ?? 0;
+			$sql = "SELECT t.name AS typeName, COUNT(m.id_model) AS modelsCount FROM type t JOIN model m ON t.id_type = m.id_type WHERE m.id_brand = :brandId GROUP BY t.name";
+			$stmt = $pdo->prepare($sql);
+			$stmt->execute(['brandId' => $brandId]);
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			echo json_encode($result);
+			return;
         } else {
             throw new Exception("Unknown request type.");
         }
         $stmt = $pdo->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    } elseif (isset($_GET['brandId'])) {
+    } elseif (isset($_GET['brandId']) && !isset($_GET['type'])) {
         $brandId = $_GET['brandId'];
         $sql = "SELECT name FROM model WHERE id_brand = :brandId";
         $stmt = $pdo->prepare($sql);
